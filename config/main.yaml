@@ -1,0 +1,3620 @@
+prompt_text_to_melody: >
+  I need assistance in producing AI-generated text that I convert to
+  music using MIDI files. Initially, I'll provide a description of the
+  format I need for the textual representation of the music.  Since
+  music is a time-based art form, the notes follow each other in time,
+  and sometimes there are no notes, that is, silences.  The way I would
+  like you to generate them is as follows: Each note is represented as a
+  tuple of two elements: The pitch of the note (integer value).  Because
+  I will use this text representation and convert to MIDI the note
+  should be a number from 21 (that is note A0 - 27,50 Hz) to 96 (that is
+  C7 - 2093 hz) so use these numbers to represent the note.  The
+  duration of the note (float value) represented as: 0.125 for an eighth
+  note 0.25 for a quarter note 0.5 for a half note 1 for a whole note 2
+  for a double whole note But could be any number between 0 and 2,
+  bocouse you know, musician are creative so why not 0.29 or 1.22, etc.
+  With this format i need you generate a text that i will covert in
+  music in this format: melody_pitch_duration_data = [ (note, duration),
+  (note, duration), (note, duration), etc, ]
+  
+  And when there is a silence the note should be 0 and the duration is
+  how long is that silence.  A melody is a linear sequence of notes that
+  the listener hears as a single entity. It is the foreground to the
+  backing elements and is a combination of pitch and rhythm. Sequences
+  of notes that comprise melody are musically satisfying and are often
+  the most memorable part of a song.  There are many ways to describe a
+  melody. Here are a few:
+  
+  Pitch: The pitch of a melody is the relative highness or lowness of
+  the notes. Melodies can be high, low, or somewhere in between.
+  
+  Rhythm: The rhythm of a melody is the pattern of long and short notes.
+  Melodies can have a slow, steady rhythm, a fast, syncopated rhythm, or
+  something in between.
+  
+  Intervals: Intervals are the distance between notes. Melodies can use
+  a variety of intervals, from small steps to large leaps.  
+  
+  Contour: The contour of a melody is the overall shape of the melody.
+  Melodies can be ascending, descending, or something in between.  
+  
+  Tonal center: The tonal center of a melody is the note that the melody
+  feels like it is centered around. Melodies can have a strong tonal
+  center, a weak tonal center, or no tonal center at all.  When
+  describing a melody, it is important to consider all of these factors.
+  The pitch, rhythm, intervals, contour, and tonal center all contribute
+  to the overall sound of the melody.  Here are some examples of how to
+  describe melodies: 
+  
+  The melody of "Happy Birthday" is simple and repetitive, with a clear
+  tonal center.
+  
+  The melody of "Yesterday" by The Beatles is more complex, with a
+  variety of intervals and a changing tonal center.
+  
+  The melody of "Bohemian Rhapsody" by Queen is highly dramatic, with a
+  wide range of pitches and rhythms.  Quality melodies typically limit
+  their range to about an octave-and-a-half, feature repeating elements
+  like melodic intervals and rhythmic patterns, and consist of stepwise
+  motion with occasional energetic leaps. Good melodies also interact
+  meaningfully with the bass line, employing a mix of parallel, similar,
+  oblique, or contrary motions for a dynamic, counter melodic effect.
+  Finally, a standout melody tends to have a climactic moment, often a
+  high note with significant harmonization and strong rhythmic
+  placement, which then descends to a restful cadence.  No matter how it
+  is described, a melody is one of the most important elements of music.
+  It is what gives a song its identity and makes it memorable.
+  
+  Please note that AI-generated music may not sound pleasing as it is
+  randomly generated so we will use music theory but not random math so
+  don't randomize the generation process. take into account musical
+  concepts like scales, modes, etc.  Now that you have a full
+  understanding of the text representation, we will create some awesome
+  music!  Are you ready to start generating music? If so, respond with
+  ‘YES’ and nothing else.
+
+note_to_midi:
+  "A#0": 22
+  "A#1": 34
+  "A#2": 46
+  "A#3": 58
+  "A#4": 70
+  "A#5": 82
+  "A#6": 94
+  "A#7": 106
+  "A#8": 118
+  "A0": 21
+  "A1": 33
+  "A2": 45
+  "A3": 57
+  "A4": 69
+  "A5": 81
+  "A6": 93
+  "A7": 105
+  "A8": 117
+  "Ab0": 20
+  "Ab1": 32
+  "Ab2": 44
+  "Ab3": 56
+  "Ab4": 68
+  "Ab5": 80
+  "Ab6": 92
+  "Ab7": 104
+  "Ab8": 116
+  "B0": 23
+  "B1": 35
+  "B2": 47
+  "B3": 59
+  "B4": 71
+  "B5": 83
+  "B6": 95
+  "B7": 107
+  "B8": 119
+  "Bb0": 22
+  "Bb1": 34
+  "Bb2": 46
+  "Bb3": 58
+  "Bb4": 70
+  "Bb5": 82
+  "Bb6": 94
+  "Bb7": 106
+  "Bb8": 118
+  "C#0": 13
+  "C#1": 25
+  "C#2": 37
+  "C#3": 49
+  "C#4": 61
+  "C#5": 73
+  "C#6": 85
+  "C#7": 97
+  "C#8": 109
+  "C#9": 121
+  "C0": 12
+  "C1": 24
+  "C2": 36
+  "C3": 48
+  "C4": 60
+  "C5": 72
+  "C6": 84
+  "C7": 96
+  "C8": 108
+  "C9": 120
+  "D#0": 15
+  "D#1": 27
+  "D#2": 39
+  "D#3": 51
+  "D#4": 63
+  "D#5": 75
+  "D#6": 87
+  "D#7": 99
+  "D#8": 111
+  "D#9": 123
+  "D0": 14
+  "D1": 26
+  "D2": 38
+  "D3": 50
+  "D4": 62
+  "D5": 74
+  "D6": 86
+  "D7": 98
+  "D8": 110
+  "D9": 122
+  "Db0": 13
+  "Db1": 25
+  "Db2": 37
+  "Db3": 49
+  "Db4": 61
+  "Db5": 73
+  "Db6": 85
+  "Db7": 97
+  "Db8": 109
+  "Db9": 121
+  "E0": 16
+  "E1": 28
+  "E2": 40
+  "E3": 52
+  "E4": 64
+  "E5": 76
+  "E6": 88
+  "E7": 100
+  "E8": 112
+  "E9": 124
+  "Eb0": 15
+  "Eb1": 27
+  "Eb2": 39
+  "Eb3": 51
+  "Eb4": 63
+  "Eb5": 75
+  "Eb6": 87
+  "Eb7": 99
+  "Eb8": 111
+  "Eb9": 123
+  "F#0": 18
+  "F#1": 30
+  "F#2": 42
+  "F#3": 54
+  "F#4": 66
+  "F#5": 78
+  "F#6": 90
+  "F#7": 102
+  "F#8": 114
+  "F#9": 126
+  "F0": 17
+  "F1": 29
+  "F2": 41
+  "F3": 53
+  "F4": 65
+  "F5": 77
+  "F6": 89
+  "F7": 101
+  "F8": 113
+  "F9": 125
+  "G#0": 20
+  "G#1": 32
+  "G#2": 44
+  "G#3": 56
+  "G#4": 68
+  "G#5": 80
+  "G#6": 92
+  "G#7": 104
+  "G#8": 116
+  "G0": 19
+  "G1": 31
+  "G2": 43
+  "G3": 55
+  "G4": 67
+  "G5": 79
+  "G6": 91
+  "G7": 103
+  "G8": 115
+  "G9": 127
+  "Gb0": 18
+  "Gb1": 30
+  "Gb2": 42
+  "Gb3": 54
+  "Gb4": 66
+  "Gb5": 78
+  "Gb6": 90
+  "Gb7": 102
+  "Gb8": 114
+  "Gb9": 126
+
+chord_to_notes:
+  "A(\u266D5)":
+  - "A"
+  - "C\u266F"
+  - "D\u266F"
+  "A(\u266F5)":
+  - "A"
+  - "C\u266F"
+  - "F"
+  "A11":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  "A11-9":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  "A13":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  "A13+11":
+  - "A"
+  - "C\u266F"
+  - "E"
+  - "G"
+  - "B"
+  - "D\u266F"
+  - "F\u266F"
+  "A13\u266D5\u266D9":
+  - "A"
+  - "C\u266F"
+  - "D\u266F"
+  - "G"
+  - "A\u266F"
+  - "D"
+  - "F\u266F"
+  "A13\u266D9":
+  - "A"
+  - "C\u266F"
+  - "E"
+  - "F\u266F"
+  - "G"
+  - "A\u266F"
+  - "D"
+  "A13\u266D9\u266F11":
+  - "A"
+  - "C\u266F"
+  - "E"
+  - "G"
+  - "A\u266F"
+  - "D\u266F"
+  - "F\u266F"
+  "A5":
+  - "A"
+  - "E"
+  "A6":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "F\u266F3"
+  "A6/9":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "F\u266F3"
+  - "B3"
+  "A7":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  "A7#5":
+  - "A3"
+  - "C\u266F3"
+  - "F3"
+  - "G3"
+  "A7+9":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "C3"
+  "A7+9-5":
+  - "A3"
+  - "C\u266F3"
+  - "D\u266F3"
+  - "G3"
+  - "C3"
+  "A7-5":
+  - "A3"
+  - "C\u266F3"
+  - "D\u266F3"
+  - "G3"
+  "A7-9":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  "A7sus4":
+  - "A3"
+  - "D3"
+  - "E3"
+  - "G3"
+  "A7\u266F11":
+  - "A"
+  - "C\u266F"
+  - "E"
+  - "G"
+  - "B"
+  - "D\u266F"
+  - "F\u266F"
+  "A7\u266F5\u266F9":
+  - "A"
+  - "C\u266F"
+  - "F"
+  - "G"
+  - "C"
+  "A9":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "B3"
+  "A9+5":
+  - "A3"
+  - "C\u266F3"
+  - "F3"
+  - "G3"
+  - "B3"
+  "A9-5":
+  - "A3"
+  - "C\u266F3"
+  - "D\u266F3"
+  - "G3"
+  - "B3"
+  "Aadd9":
+  - "A"
+  - "C\u266F"
+  - "E"
+  - "B"
+  "Aaug":
+  - "A3"
+  - "C\u266F3"
+  - "F3"
+  "Adim":
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  "Adim7":
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "Am":
+  - "A3"
+  - "C4"
+  - "E4"
+  "Am/maj7":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "Am11":
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  "Am13":
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  "Am7":
+  - "A3"
+  - "C4"
+  - "E4"
+  - "G4"
+  "Am7b5":
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  "Am9":
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  "Am9-5":
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "B3"
+  "Amadd9":
+  - "A"
+  - "C"
+  - "E"
+  - "B"
+  "Amaj":
+  - "A3"
+  - "C\u266F4"
+  - "E4"
+  "Amaj13":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  "Amaj13\u266F11":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "Amaj7":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "Amaj7+5":
+  - "A3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  "Amaj7-5":
+  - "A3"
+  - "C\u266F3"
+  - "D\u266F3"
+  - "G\u266F3"
+  "Amaj9":
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "C3"
+  "Amin6":
+  - "A3"
+  - "C3"
+  - "E3"
+  - "F\u266F3"
+  "Asus2":
+  - "A"
+  - "B"
+  - "E"
+  "Asus4":
+  - "A3"
+  - "D3"
+  - "E3"
+  "A\u266F(\u266D5)":
+  - "A\u266F"
+  - "D"
+  - "E"
+  "A\u266F(\u266F5)":
+  - "A\u266F"
+  - "D"
+  - "F\u266F"
+  "A\u266F11":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  "A\u266F11-9":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  "A\u266F13":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  "A\u266F13+11":
+  - "A\u266F"
+  - "D"
+  - "F"
+  - "G\u266F"
+  - "C"
+  - "E"
+  - "G"
+  "A\u266F13\u266D5\u266D9":
+  - "A\u266F"
+  - "D"
+  - "E"
+  - "G\u266F"
+  - "B"
+  - "D\u266F"
+  - "G"
+  "A\u266F13\u266D9":
+  - "A\u266F"
+  - "D"
+  - "F"
+  - "G"
+  - "G\u266F"
+  - "B"
+  - "D\u266F"
+  "A\u266F13\u266D9\u266F11":
+  - "A\u266F"
+  - "D"
+  - "F"
+  - "G\u266F"
+  - "B"
+  - "E"
+  - "G"
+  "A\u266F5":
+  - "A\u266F"
+  - "F"
+  "A\u266F6":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G3"
+  "A\u266F6/9":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G3"
+  - "C3"
+  "A\u266F7":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  "A\u266F7#5":
+  - "A\u266F3"
+  - "D3"
+  - "F\u266F3"
+  - "G\u266F3"
+  "A\u266F7+9":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "C\u266F3"
+  "A\u266F7+9-5":
+  - "A\u266F3"
+  - "D3"
+  - "E3"
+  - "G\u266F3"
+  - "C\u266F3"
+  "A\u266F7-5":
+  - "A\u266F3"
+  - "D3"
+  - "E3"
+  - "G\u266F3"
+  "A\u266F7-9":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  "A\u266F7sus4":
+  - "A\u266F3"
+  - "D\u266F3"
+  - "F3"
+  - "G\u266F3"
+  "A\u266F7\u266F11":
+  - "A\u266F"
+  - "D"
+  - "F"
+  - "G\u266F"
+  - "C"
+  - "E"
+  - "G"
+  "A\u266F7\u266F5\u266F9":
+  - "A\u266F"
+  - "D"
+  - "F\u266F"
+  - "G\u266F"
+  - "C\u266F"
+  "A\u266F9":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  "A\u266F9+5":
+  - "A\u266F3"
+  - "D3"
+  - "F\u266F3"
+  - "G\u266F3"
+  - "C3"
+  "A\u266F9-5":
+  - "A\u266F3"
+  - "D3"
+  - "E3"
+  - "G\u266F3"
+  - "C3"
+  "A\u266Fadd9":
+  - "A\u266F"
+  - "D"
+  - "F"
+  - "C"
+  "A\u266Faug":
+  - "A\u266F3"
+  - "D3"
+  - "F\u266F3"
+  "A\u266Fdim":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  "A\u266Fdim7":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  "A\u266Fm":
+  - "A\u266F3"
+  - "C\u266F4"
+  - "F4"
+  "A\u266Fm/maj7":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "A3"
+  "A\u266Fm11":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  "A\u266Fm13":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  "A\u266Fm7":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  "A\u266Fm7b5":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "A\u266Fm9":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  "A\u266Fm9-5":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "C3"
+  "A\u266Fmadd9":
+  - "A\u266F"
+  - "C\u266F"
+  - "F"
+  - "C"
+  "A\u266Fmaj":
+  - "A\u266F3"
+  - "D4"
+  - "F4"
+  "A\u266Fmaj13":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  "A\u266Fmaj13\u266F11":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  "A\u266Fmaj7":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A3"
+  "A\u266Fmaj7+5":
+  - "A\u266F3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  "A\u266Fmaj7-5":
+  - "A\u266F3"
+  - "D3"
+  - "E3"
+  - "A3"
+  "A\u266Fmaj9":
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A4"
+  - "C\u266F4"
+  "A\u266Fmin6":
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G3"
+  "A\u266Fsus2":
+  - "A\u266F"
+  - "C"
+  - "F"
+  "A\u266Fsus4":
+  - "A\u266F3"
+  - "D\u266F3"
+  - "F3"
+  "B(\u266D5)":
+  - "B"
+  - "D\u266F"
+  - "F"
+  "B(\u266F5)":
+  - "B"
+  - "D\u266F"
+  - "G"
+  "B11":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  "B11-9":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  "B13":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "B13+11":
+  - "B"
+  - "D\u266F"
+  - "F\u266F"
+  - "A"
+  - "C\u266F"
+  - "F"
+  - "G\u266F"
+  "B13\u266D5\u266D9":
+  - "B"
+  - "D\u266F"
+  - "F"
+  - "A"
+  - "C"
+  - "E"
+  - "G\u266F"
+  "B13\u266D9":
+  - "B"
+  - "D\u266F"
+  - "F\u266F"
+  - "A"
+  - "A\u266F"
+  - "C\u266F"
+  - "E"
+  "B13\u266D9\u266F11":
+  - "B3"
+  - "D\u266F4"
+  - "F\u266F4"
+  - "A4"
+  - "C5"
+  - "F5"
+  - "G\u266F5"
+  "B5":
+  - "B"
+  - "F\u266F"
+  "B6":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "G\u266F3"
+  "B6/9":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "G\u266F3"
+  - "C\u266F3"
+  "B7":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  "B7#5":
+  - "B3"
+  - "D\u266F3"
+  - "G3"
+  - "A3"
+  "B7+9":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "D3"
+  "B7+9-5":
+  - "B3"
+  - "D\u266F3"
+  - "F3"
+  - "A3"
+  - "D3"
+  "B7-5":
+  - "B3"
+  - "D\u266F3"
+  - "F3"
+  - "A3"
+  "B7-9":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  "B7sus4":
+  - "B3"
+  - "E3"
+  - "F\u266F3"
+  - "A3"
+  "B7\u266F11":
+  - "B"
+  - "D\u266F"
+  - "F\u266F"
+  - "A"
+  - "C\u266F"
+  - "F"
+  - "G\u266F"
+  "B7\u266F5\u266F9":
+  - "B"
+  - "D\u266F"
+  - "G"
+  - "A"
+  - "D"
+  "B9":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  "B9+5":
+  - "B3"
+  - "D\u266F3"
+  - "G3"
+  - "A3"
+  - "C\u266F3"
+  "B9-5":
+  - "B3"
+  - "D\u266F3"
+  - "F3"
+  - "A3"
+  - "C\u266F3"
+  "Badd9":
+  - "B"
+  - "D\u266F"
+  - "F\u266F"
+  - "C\u266F"
+  "Baug":
+  - "B3"
+  - "D\u266F3"
+  - "G3"
+  "Bdim":
+  - "B3"
+  - "D3"
+  - "F3"
+  "Bdim7":
+  - "B3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  "Bm":
+  - "B3"
+  - "D4"
+  - "F\u266F4"
+  "Bm/maj7":
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "Bm11":
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  "Bm13":
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "Bm7":
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  "Bm7b5":
+  - "B3"
+  - "D3"
+  - "F3"
+  - "A3"
+  "Bm9":
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  "Bm9-5":
+  - "B3"
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C\u266F3"
+  "Bmadd9":
+  - "B"
+  - "D"
+  - "F\u266F"
+  - "C\u266F"
+  "Bmaj":
+  - "B3"
+  - "D\u266F4"
+  - "F\u266F4"
+  "Bmaj13":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "Bmaj13\u266F11":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  "Bmaj7":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "Bmaj7+5":
+  - "B3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  "Bmaj7-5":
+  - "B3"
+  - "D\u266F3"
+  - "F3"
+  - "A\u266F3"
+  "Bmaj9":
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "Bmin6":
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "G\u266F3"
+  "Bsus2":
+  - "B"
+  - "C\u266F"
+  - "F\u266F"
+  "Bsus4":
+  - "B3"
+  - "E3"
+  - "F\u266F3"
+  "C(\u266D5)":
+  - "C"
+  - "E"
+  - "F\u266F"
+  "C(\u266F5)":
+  - "C"
+  - "E"
+  - "G\u266F"
+  "C11":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  "C11-9":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  "C13":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A3"
+  "C13+11":
+  - "C"
+  - "E"
+  - "G"
+  - "A\u266F"
+  - "D"
+  - "F\u266F"
+  - "A"
+  "C13\u266D5\u266D9":
+  - "C"
+  - "E"
+  - "F\u266F"
+  - "A\u266F"
+  - "C\u266F"
+  - "F"
+  - "A"
+  "C13\u266D9":
+  - "C"
+  - "E"
+  - "G"
+  - "A\u266F"
+  - "C\u266F"
+  - "F"
+  - "A"
+  "C13\u266D9\u266F11":
+  - "C"
+  - "E"
+  - "G"
+  - "A\u266F"
+  - "C\u266F"
+  - "F\u266F"
+  - "A"
+  "C5":
+  - "C"
+  - "G"
+  "C6":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A3"
+  "C6/9":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A3"
+  - "D3"
+  "C7":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A\u266F4"
+  "C7+5":
+  - "C3"
+  - "E3"
+  - "G\u266F3"
+  - "A\u266F3"
+  "C7+9":
+  - "C3"
+  - "E4"
+  - "G4"
+  - "A\u266F4"
+  - "D\u266F4"
+  "C7+9-5":
+  - "C3"
+  - "E3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "D\u266F3"
+  "C7-5":
+  - "C3"
+  - "E3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "C7-9":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "C7/6":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A3"
+  - "A\u266F3"
+  "C7sus4":
+  - "C3"
+  - "F3"
+  - "G3"
+  - "A\u266F3"
+  "C7\u266D5\u266D9":
+  - "C3"
+  - "E3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "C7\u266F11":
+  - "C"
+  - "E"
+  - "G"
+  - "A\u266F"
+  - "D"
+  - "F\u266F"
+  - "A"
+  "C9":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  "C9+5":
+  - "C3"
+  - "E3"
+  - "G\u266F3"
+  - "A\u266F3"
+  - "D3"
+  "C9-5":
+  - "C3"
+  - "E3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "D3"
+  "Cadd9":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "D4"
+  "Caug":
+  - "C3"
+  - "E3"
+  - "G\u266F3"
+  "Cdim":
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "Cdim7":
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  "Cm":
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  "Cm/maj7":
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "B3"
+  "Cm/maj9":
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "B3"
+  - "D3"
+  "Cm11":
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  "Cm13":
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A3"
+  "Cm6/9":
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A3"
+  - "D3"
+  "Cm7":
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  "Cm7b5":
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "Cm7\u266F5":
+  - "C3"
+  - "D\u266F3"
+  - "G\u266F3"
+  - "A\u266F3"
+  "Cm9":
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  "Cm9-5":
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "D3"
+  "Cmadd9":
+  - "C"
+  - "D\u266F"
+  - "G"
+  - "D"
+  "Cmaj":
+  - "C3"
+  - "E3"
+  - "G3"
+  "Cmaj11":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D4"
+  - "F4"
+  "Cmaj13":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F3"
+  - "A3"
+  "Cmaj13\u266F11":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  "Cmaj7":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  "Cmaj7+5":
+  - "C3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  "Cmaj7-5":
+  - "C3"
+  - "E3"
+  - "F\u266F3"
+  - "B3"
+  "Cmaj9":
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  "Cmin6":
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A3"
+  "Csus2":
+  - "C"
+  - "D"
+  - "G"
+  "Csus4":
+  - "C3"
+  - "F3"
+  - "G3"
+  "C\u266F(\u266D5)":
+  - "C\u266F"
+  - "F"
+  - "G"
+  "C\u266F(\u266F5)":
+  - "C\u266F"
+  - "F"
+  - "A"
+  "C\u266F11":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "C\u266F11-9":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  "C\u266F13":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "C\u266F13+11":
+  - "C\u266F"
+  - "F"
+  - "G\u266F"
+  - "B"
+  - "D\u266F"
+  - "G"
+  - "A\u266F"
+  "C\u266F13\u266D5\u266D9":
+  - "C\u266F"
+  - "F"
+  - "G"
+  - "B"
+  - "D"
+  - "F\u266F"
+  - "A\u266F"
+  "C\u266F13\u266D9":
+  - "C\u266F"
+  - "F"
+  - "G\u266F"
+  - "A\u266F"
+  - "B"
+  - "D\u266F"
+  - "F\u266F"
+  "C\u266F13\u266D9\u266F11":
+  - "C\u266F"
+  - "F"
+  - "G\u266F"
+  - "B"
+  - "D"
+  - "G"
+  - "A\u266F"
+  "C\u266F5":
+  - "C\u266F"
+  - "G\u266F"
+  "C\u266F6":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "A\u266F3"
+  "C\u266F6/9":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "A\u266F3"
+  - "D\u266F3"
+  "C\u266F7":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "B4"
+  "C\u266F7+5":
+  - "C\u266F3"
+  - "F3"
+  - "A3"
+  - "B3"
+  "C\u266F7+9":
+  - "C\u266F4"
+  - "F4"
+  - "G\u266F4"
+  - "B4"
+  - "E4"
+  "C\u266F7+9-5":
+  - "C\u266F3"
+  - "F3"
+  - "G3"
+  - "B3"
+  - "E3"
+  "C\u266F7-5":
+  - "C\u266F3"
+  - "F3"
+  - "G3"
+  - "B3"
+  "C\u266F7-9":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  "C\u266F7/6":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "A\u266F3"
+  - "B3"
+  "C\u266F7sus4":
+  - "C\u266F3"
+  - "F\u266F3"
+  - "G\u266F3"
+  - "B3"
+  "C\u266F7\u266D5\u266D9":
+  - "C\u266F3"
+  - "F3"
+  - "G3"
+  - "B3"
+  - "D3"
+  "C\u266F7\u266F11":
+  - "C\u266F"
+  - "F"
+  - "G\u266F"
+  - "B"
+  - "D\u266F"
+  - "G"
+  - "A\u266F"
+  "C\u266F9":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  "C\u266F9+5":
+  - "C\u266F3"
+  - "F3"
+  - "A3"
+  - "B3"
+  - "D\u266F3"
+  "C\u266F9-5":
+  - "C\u266F3"
+  - "F3"
+  - "G3"
+  - "B3"
+  - "D\u266F3"
+  "C\u266Fadd9":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "D\u266F4"
+  "C\u266Faug":
+  - "C\u266F3"
+  - "F3"
+  - "A3"
+  "C\u266Fdim":
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  "C\u266Fdim7":
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  "C\u266Fm":
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "C\u266Fm/maj7":
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "C3"
+  "C\u266Fm/maj9":
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  "C\u266Fm11":
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "C\u266Fm13":
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "C\u266Fm6/9":
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "A\u266F3"
+  - "D\u266F3"
+  "C\u266Fm7":
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  "C\u266Fm7b5":
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "B3"
+  "C\u266Fm7\u266F5":
+  - "C\u266F3"
+  - "E3"
+  - "A3"
+  - "B3"
+  "C\u266Fm9":
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  "C\u266Fm9-5":
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D\u266F3"
+  "C\u266Fmadd9":
+  - "C\u266F"
+  - "E"
+  - "G\u266F"
+  - "D\u266F"
+  "C\u266Fmaj":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  "C\u266Fmaj11":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C4"
+  - "D\u266F4"
+  - "F\u266F4"
+  "C\u266Fmaj13":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "C\u266Fmaj13\u266F11":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  "C\u266Fmaj7":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  "C\u266Fmaj7+5":
+  - "C\u266F3"
+  - "F3"
+  - "A3"
+  - "C3"
+  "C\u266Fmaj7-5":
+  - "C\u266F3"
+  - "F3"
+  - "G3"
+  - "C3"
+  "C\u266Fmaj9":
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  "C\u266Fmin6":
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "A\u266F3"
+  "C\u266Fsus2":
+  - "C\u266F"
+  - "D\u266F"
+  - "G\u266F"
+  "C\u266Fsus4":
+  - "C\u266F3"
+  - "F\u266F3"
+  - "G\u266F3"
+  "D(\u266D5)":
+  - "D"
+  - "F\u266F"
+  - "G\u266F"
+  "D(\u266F5)":
+  - "D"
+  - "F\u266F"
+  - "A\u266F"
+  "D11":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  "D11-9":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  "D13":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  "D13+11":
+  - "D"
+  - "F\u266F"
+  - "A"
+  - "C"
+  - "E"
+  - "G\u266F"
+  - "B"
+  "D13\u266D5\u266D9":
+  - "D"
+  - "F\u266F"
+  - "G\u266F"
+  - "C"
+  - "D\u266F"
+  - "G"
+  - "B"
+  "D13\u266D9":
+  - "D"
+  - "F\u266F"
+  - "A"
+  - "B"
+  - "C"
+  - "D\u266F"
+  - "G"
+  "D13\u266D9\u266F11":
+  - "D"
+  - "F\u266F"
+  - "A"
+  - "C"
+  - "D\u266F"
+  - "G\u266F"
+  - "B"
+  "D5":
+  - "D"
+  - "A"
+  "D6":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "B3"
+  "D6/9":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "B3"
+  - "E3"
+  "D7":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  "D7+5":
+  - "D3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C3"
+  "D7+9":
+  - "D3"
+  - "F\u266F4"
+  - "A4"
+  - "C4"
+  - "F4"
+  "D7+9-5":
+  - "D3"
+  - "F\u266F3"
+  - "G\u266F3"
+  - "C3"
+  - "F3"
+  "D7-5":
+  - "D3"
+  - "F\u266F3"
+  - "G\u266F3"
+  - "C3"
+  "D7-9":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  "D7/6":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "B3"
+  - "C3"
+  "D7sus4":
+  - "D3"
+  - "G3"
+  - "A3"
+  - "C3"
+  "D7\u266D5\u266D9":
+  - "D3"
+  - "F\u266F3"
+  - "G3"
+  - "C3"
+  - "D\u266F3"
+  "D7\u266F11":
+  - "D"
+  - "F\u266F"
+  - "A"
+  - "C"
+  - "E"
+  - "G\u266F"
+  - "B"
+  "D9":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C4"
+  - "E4"
+  "D9+5":
+  - "D3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C3"
+  - "E3"
+  "D9-5":
+  - "D3"
+  - "F\u266F3"
+  - "G\u266F3"
+  - "C3"
+  - "E3"
+  "Dadd9":
+  - "D"
+  - "F\u266F"
+  - "A"
+  - "E"
+  "Daug":
+  - "D3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "Ddim":
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  "Ddim7":
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  "Dm":
+  - "D3"
+  - "F3"
+  - "A3"
+  "Dm/maj7":
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C\u266F3"
+  "Dm/maj9":
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  "Dm11":
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  "Dm13":
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  "Dm6/9":
+  - "D3"
+  - "F3"
+  - "A3"
+  - "B3"
+  - "E3"
+  "Dm7":
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  "Dm7b5":
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  "Dm7\u266F5":
+  - "D3"
+  - "F3"
+  - "A\u266F3"
+  - "C3"
+  "Dm9":
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  "Dm9-5":
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "E3"
+  "Dmadd9":
+  - "D"
+  - "F"
+  - "A"
+  - "E"
+  "Dmaj":
+  - "D3"
+  - "F#3"
+  - "A3"
+  "Dmaj11":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  "Dmaj13":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "B3"
+  "Dmaj13\u266F11":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  "Dmaj7":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  "Dmaj7+5":
+  - "D3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "Dmaj7-5":
+  - "D3"
+  - "F\u266F3"
+  - "G\u266F3"
+  - "C\u266F3"
+  "Dmaj9":
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  "Dmin6":
+  - "D3"
+  - "F3"
+  - "A3"
+  - "B3"
+  "Dsus2":
+  - "D"
+  - "E"
+  - "A"
+  "Dsus4":
+  - "D3"
+  - "G3"
+  - "A3"
+  "D\u266F(\u266D5)":
+  - "D\u266F"
+  - "G"
+  - "A"
+  "D\u266F(\u266F5)":
+  - "D\u266F"
+  - "G"
+  - "B"
+  "D\u266F11":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  "D\u266F11-9":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "D\u266F13":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  "D\u266F13+11":
+  - "D\u266F"
+  - "G"
+  - "A\u266F"
+  - "C\u266F"
+  - "F"
+  - "A"
+  - "C"
+  "D\u266F13\u266D5\u266D9":
+  - "D\u266F"
+  - "G"
+  - "A"
+  - "C\u266F"
+  - "E"
+  - "G\u266F"
+  - "C"
+  "D\u266F13\u266D9":
+  - "D\u266F"
+  - "G"
+  - "A\u266F"
+  - "C"
+  - "C\u266F"
+  - "E"
+  - "G\u266F"
+  "D\u266F13\u266D9\u266F11":
+  - "D\u266F"
+  - "G"
+  - "A\u266F"
+  - "C\u266F"
+  - "E"
+  - "A"
+  - "C"
+  "D\u266F5":
+  - "D\u266F"
+  - "A\u266F"
+  "D\u266F6":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C3"
+  "D\u266F6/9":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C3"
+  - "F3"
+  "D\u266F7":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F4"
+  "D\u266F7+5":
+  - "D\u266F3"
+  - "G3"
+  - "B3"
+  - "C\u266F3"
+  "D\u266F7+9":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F\u266F3"
+  "D\u266F7+9-5":
+  - "D\u266F3"
+  - "G3"
+  - "A3"
+  - "C\u266F3"
+  - "F\u266F3"
+  "D\u266F7-5":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "D\u266F7-9":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  "D\u266F7/6":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C3"
+  - "D3"
+  "D\u266F7sus4":
+  - "D\u266F3"
+  - "G\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "D\u266F7\u266D5\u266D9":
+  - "D\u266F3"
+  - "G3"
+  - "G\u266F3"
+  - "D3"
+  - "E3"
+  "D\u266F7\u266F11":
+  - "D\u266F"
+  - "G"
+  - "A\u266F"
+  - "C\u266F"
+  - "F"
+  - "A"
+  - "C"
+  "D\u266F9":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  "D\u266F9+5":
+  - "D\u266F3"
+  - "G3"
+  - "B3"
+  - "C\u266F3"
+  - "F3"
+  "D\u266F9-5":
+  - "D\u266F3"
+  - "G3"
+  - "A3"
+  - "C\u266F3"
+  - "F3"
+  "D\u266Fadd9":
+  - "D\u266F"
+  - "G"
+  - "A\u266F"
+  - "F"
+  "D\u266Faug":
+  - "D\u266F3"
+  - "G3"
+  - "B3"
+  "D\u266Fdim":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  "D\u266Fdim7":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  "D\u266Fm":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "D\u266Fm/maj7":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "D3"
+  "D\u266Fm/maj9":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  "D\u266Fm11":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  "D\u266Fm13":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  "D\u266Fm6/9":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C3"
+  - "F3"
+  "D\u266Fm7":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "D\u266Fm7b5":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "D\u266Fm7\u266F5":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "B3"
+  - "D3"
+  "D\u266Fm9":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  "D\u266Fm9-5":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "F3"
+  "D\u266Fmadd9":
+  - "D\u266F"
+  - "F\u266F"
+  - "A\u266F"
+  - "F"
+  "D\u266Fmaj":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  "D\u266Fmaj11":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  "D\u266Fmaj13":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  "D\u266Fmaj13\u266F11":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  "D\u266Fmaj7":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  "D\u266Fmaj7+5":
+  - "D\u266F3"
+  - "G3"
+  - "B3"
+  - "D3"
+  "D\u266Fmaj7-5":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  "D\u266Fmaj9":
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  "D\u266Fmin6":
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C3"
+  "D\u266Fsus2":
+  - "D\u266F"
+  - "F"
+  - "A\u266F"
+  "D\u266Fsus4":
+  - "D\u266F3"
+  - "G\u266F3"
+  - "A\u266F3"
+  "E(\u266D5)":
+  - "E"
+  - "G\u266F"
+  - "A\u266F"
+  "E(\u266F5)":
+  - "E"
+  - "G\u266F"
+  - "C"
+  "E11":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  "E11-9":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F3"
+  - "A3"
+  "E13":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  "E13+11":
+  - "E"
+  - "G\u266F"
+  - "B"
+  - "D"
+  - "F\u266F"
+  - "A\u266F"
+  - "C\u266F"
+  "E13\u266D5\u266D9":
+  - "E"
+  - "G\u266F"
+  - "A\u266F"
+  - "D"
+  - "F"
+  - "A"
+  - "C\u266F"
+  "E13\u266D9":
+  - "E"
+  - "G\u266F"
+  - "B"
+  - "C\u266F"
+  - "D"
+  - "F"
+  - "A"
+  "E13\u266D9\u266F11":
+  - "E"
+  - "G\u266F"
+  - "B"
+  - "D"
+  - "F"
+  - "A\u266F"
+  - "C\u266F"
+  "E5":
+  - "E"
+  - "B"
+  "E6":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "C\u266F3"
+  "E6/9":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "C\u266F3"
+  - "F\u266F3"
+  "E7":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D4"
+  "E7+5":
+  - "E3"
+  - "G\u266F3"
+  - "C3"
+  - "D3"
+  "E7+9":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "G3"
+  "E7+9-5":
+  - "E3"
+  - "G\u266F3"
+  - "A\u266F3"
+  - "D3"
+  - "G3"
+  "E7-5":
+  - "E3"
+  - "G\u266F3"
+  - "A\u266F3"
+  - "D3"
+  "E7-9":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F3"
+  "E7/6":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "C\u266F3"
+  - "D\u266F3"
+  "E7sus4":
+  - "E3"
+  - "A3"
+  - "B3"
+  - "D3"
+  "E7\u266D5\u266D9":
+  - "E3"
+  - "G\u266F3"
+  - "A3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "E7\u266F11":
+  - "E"
+  - "G\u266F"
+  - "B"
+  - "D"
+  - "F\u266F"
+  - "A\u266F"
+  - "C\u266F"
+  "E9":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  "E9+5":
+  - "E3"
+  - "G\u266F3"
+  - "C3"
+  - "D3"
+  - "F\u266F3"
+  "E9-5":
+  - "E3"
+  - "G\u266F3"
+  - "A\u266F3"
+  - "D3"
+  - "F\u266F3"
+  "Eadd9":
+  - "E"
+  - "G\u266F"
+  - "B"
+  - "F\u266F"
+  "Eaug":
+  - "E3"
+  - "G\u266F3"
+  - "C3"
+  "Edim":
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  "Edim7":
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "Em":
+  - "E3"
+  - "G4"
+  - "B4"
+  "Em/maj7":
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D\u266F3"
+  "Em/maj9":
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "Em11":
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  "Em13":
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  "Em6/9":
+  - "E3"
+  - "G3"
+  - "B3"
+  - "C\u266F3"
+  - "F\u266F3"
+  "Em7":
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  "Em7b5":
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  "Em7\u266F5":
+  - "E3"
+  - "G3"
+  - "C3"
+  - "D\u266F3"
+  "Em9":
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  "Em9-5":
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F\u266F3"
+  "Emadd9":
+  - "E"
+  - "G"
+  - "B"
+  - "F\u266F"
+  "Emaj":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  "Emaj11":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  "Emaj13":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  "Emaj13\u266F11":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "Emaj7":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  "Emaj7+5":
+  - "E3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  "Emaj7-5":
+  - "E3"
+  - "G\u266F3"
+  - "A\u266F3"
+  - "D\u266F3"
+  "Emaj9":
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "Emin6":
+  - "E3"
+  - "G3"
+  - "B3"
+  - "C\u266F3"
+  "Esus2":
+  - "E"
+  - "F\u266F"
+  - "B"
+  "Esus4":
+  - "E3"
+  - "A3"
+  - "B3"
+  "F(\u266D5)":
+  - "F"
+  - "A"
+  - "B"
+  "F(\u266F5)":
+  - "F"
+  - "A"
+  - "C\u266F"
+  "F11":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  "F11-9":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "F13":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  "F13+11":
+  - "F"
+  - "A"
+  - "C"
+  - "D\u266F"
+  - "G"
+  - "B"
+  - "D"
+  "F13\u266D5\u266D9":
+  - "F"
+  - "A"
+  - "B"
+  - "D\u266F"
+  - "F\u266F"
+  - "A\u266F"
+  - "D"
+  "F13\u266D9":
+  - "F"
+  - "A"
+  - "C"
+  - "D"
+  - "D\u266F"
+  - "G"
+  - "A\u266F"
+  "F13\u266D9\u266F11":
+  - "F"
+  - "A"
+  - "C"
+  - "D\u266F"
+  - "F\u266F"
+  - "B"
+  - "D"
+  "F5":
+  - "F"
+  - "C"
+  "F6":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D3"
+  "F6/9":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D3"
+  - "G3"
+  "F7":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D\u266F4"
+  "F7+5":
+  - "F3"
+  - "A3"
+  - "C\u266F3"
+  - "D\u266F3"
+  "F7+9":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "G\u266F3"
+  "F7+9-5":
+  - "F3"
+  - "A3"
+  - "B3"
+  - "D\u266F3"
+  - "G\u266F3"
+  "F7-5":
+  - "F3"
+  - "A3"
+  - "B3"
+  - "D\u266F3"
+  "F7-9":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "F7sus4":
+  - "F3"
+  - "A\u266F3"
+  - "C3"
+  - "D\u266F3"
+  "F7\u266F11":
+  - "F"
+  - "A"
+  - "C"
+  - "D\u266F"
+  - "G"
+  - "B"
+  - "D"
+  "F7\u266F5\u266F9":
+  - "F"
+  - "A"
+  - "C\u266F"
+  - "D\u266F"
+  - "G\u266F"
+  "F9":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  "F9+5":
+  - "F3"
+  - "A3"
+  - "C\u266F3"
+  - "D\u266F3"
+  - "G3"
+  "F9-5":
+  - "F3"
+  - "A3"
+  - "B3"
+  - "D\u266F3"
+  - "G3"
+  "Fadd9":
+  - "F"
+  - "A"
+  - "C"
+  - "G"
+  "Faug":
+  - "F3"
+  - "A3"
+  - "C\u266F3"
+  "Fdim":
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  "Fdim7":
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  "Fm":
+  - "F3"
+  - "G\u266F3"
+  - "C4"
+  "Fm/maj7":
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "E3"
+  "Fm11":
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  "Fm13":
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  "Fm7":
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  "Fm7b5":
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  "Fm9":
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "G3"
+  "Fm9-5":
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "G3"
+  "Fmadd9":
+  - "F"
+  - "G\u266F"
+  - "C"
+  - "G"
+  "Fmaj":
+  - "F3"
+  - "A3"
+  - "C4"
+  "Fmaj13":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  "Fmaj13\u266F11":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  - "B3"
+  - "D3"
+  "Fmaj7":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  "Fmaj7+5":
+  - "F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  "Fmaj7-5":
+  - "F3"
+  - "A3"
+  - "B3"
+  - "E3"
+  "Fmaj9":
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G3"
+  "Fmin6":
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D3"
+  "Fsus2":
+  - "F"
+  - "G"
+  - "C"
+  "Fsus4":
+  - "F3"
+  - "A\u266F3"
+  - "C3"
+  "F\u266F(\u266D5)":
+  - "F\u266F"
+  - "A\u266F"
+  - "C"
+  "F\u266F(\u266F5)":
+  - "F\u266F"
+  - "A\u266F"
+  - "D"
+  "F\u266F11":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  "F\u266F11-9":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  - "B3"
+  "F\u266F13":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  "F\u266F13+11":
+  - "F\u266F"
+  - "A\u266F"
+  - "C\u266F"
+  - "E"
+  - "G\u266F"
+  - "C"
+  - "D\u266F"
+  "F\u266F13\u266D5\u266D9":
+  - "F\u266F"
+  - "A\u266F"
+  - "C"
+  - "E"
+  - "G"
+  - "B"
+  - "D\u266F"
+  "F\u266F13\u266D9":
+  - "F\u266F"
+  - "A\u266F"
+  - "C\u266F"
+  - "D\u266F"
+  - "E"
+  - "G\u266F"
+  - "B"
+  "F\u266F13\u266D9\u266F11":
+  - "F\u266F"
+  - "A\u266F"
+  - "C\u266F"
+  - "D\u266F"
+  - "E"
+  - "G\u266F"
+  - "B"
+  "F\u266F5":
+  - "F\u266F"
+  - "C\u266F"
+  "F\u266F6":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "D\u266F3"
+  "F\u266F6/9":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "D\u266F3"
+  - "G\u266F3"
+  "F\u266F7":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  "F\u266F7+5":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "D3"
+  - "E3"
+  "F\u266F7+9":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "A3"
+  "F\u266F7+9-5":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C3"
+  - "E3"
+  - "A3"
+  "F\u266F7-5":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C3"
+  - "E3"
+  "F\u266F7-9":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G3"
+  "F\u266F7sus4":
+  - "F\u266F3"
+  - "B3"
+  - "C\u266F3"
+  - "E3"
+  "F\u266F7\u266F11":
+  - "F\u266F"
+  - "A\u266F"
+  - "C\u266F"
+  - "E"
+  - "G\u266F"
+  - "C"
+  - "D\u266F"
+  "F\u266F7\u266F5\u266F9":
+  - "F\u266F"
+  - "A\u266F"
+  - "D"
+  - "E"
+  - "A"
+  "F\u266F9":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "F\u266F9+5":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "D3"
+  - "E3"
+  - "G\u266F3"
+  "F\u266F9-5":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C3"
+  - "E3"
+  - "G\u266F3"
+  "F\u266Fadd9":
+  - "F\u266F"
+  - "A\u266F"
+  - "C\u266F"
+  - "G\u266F"
+  "F\u266Faug":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "D3"
+  "F\u266Fdim":
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  "F\u266Fdim7":
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  - "D\u266F3"
+  "F\u266Fm":
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F4"
+  "F\u266Fm/maj7":
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "F3"
+  "F\u266Fm11":
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  "F\u266Fm13":
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  "F\u266Fm7":
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  "F\u266Fm7b5":
+  - "F\u266F3"
+  - "A3"
+  - "C4"
+  - "E4"
+  "F\u266Fm9":
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  - "G\u266F3"
+  "F\u266Fm9-5":
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  - "G\u266F3"
+  "F\u266Fmadd9":
+  - "F\u266F"
+  - "A"
+  - "C\u266F"
+  - "G\u266F"
+  "F\u266Fmaj":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F4"
+  "F\u266Fmaj13":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  "F\u266Fmaj13\u266F11":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  "F\u266Fmaj7":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  "F\u266Fmaj7+5":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  "F\u266Fmaj7-5":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C3"
+  - "F3"
+  "F\u266Fmaj9":
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "A3"
+  "F\u266Fmin6":
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "D\u266F3"
+  "F\u266Fsus2":
+  - "F\u266F"
+  - "G\u266F"
+  - "C\u266F"
+  "F\u266Fsus4":
+  - "F\u266F3"
+  - "B3"
+  - "C\u266F3"
+  "G(\u266D5)":
+  - "G"
+  - "B"
+  - "C\u266F"
+  "G(\u266F5)":
+  - "G"
+  - "B"
+  - "D\u266F"
+  "G11":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  "G11-9":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  - "C3"
+  "G13":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  "G13+11":
+  - "G"
+  - "B"
+  - "D"
+  - "F"
+  - "A"
+  - "C\u266F"
+  - "E"
+  "G13\u266D5\u266D9":
+  - "G"
+  - "B"
+  - "C\u266F"
+  - "F"
+  - "G\u266F"
+  - "C"
+  - "E"
+  "G13\u266D9":
+  - "G"
+  - "B"
+  - "D"
+  - "E"
+  - "F"
+  - "G\u266F"
+  - "C"
+  "G13\u266D9\u266F11":
+  - "G"
+  - "B"
+  - "D"
+  - "F"
+  - "G\u266F"
+  - "C\u266F"
+  - "E"
+  "G5":
+  - "G"
+  - "D"
+  "G6":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "E3"
+  "G6/9":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "E3"
+  - "A3"
+  "G7":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F3"
+  "G7+5":
+  - "G3"
+  - "B3"
+  - "D\u266F3"
+  - "F3"
+  "G7+9":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F3"
+  - "A\u266F3"
+  "G7+9-5":
+  - "G3"
+  - "B3"
+  - "C\u266F3"
+  - "F3"
+  - "A\u266F3"
+  "G7-5":
+  - "G3"
+  - "B3"
+  - "C\u266F3"
+  - "F3"
+  "G7-9":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F3"
+  - "G\u266F3"
+  "G7sus4":
+  - "G3"
+  - "C3"
+  - "D3"
+  - "F3"
+  "G7\u266F11":
+  - "G"
+  - "B"
+  - "D"
+  - "F"
+  - "A"
+  - "C\u266F"
+  - "E"
+  "G7\u266F5\u266F9":
+  - "G"
+  - "B"
+  - "D\u266F"
+  - "F"
+  - "A\u266F"
+  "G9":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F3"
+  - "A\u266F3"
+  "G9+5":
+  - "G3"
+  - "B3"
+  - "D\u266F3"
+  - "F3"
+  - "A3"
+  "G9-5":
+  - "G3"
+  - "B3"
+  - "C\u266F3"
+  - "F3"
+  - "A3"
+  "Gadd9":
+  - "G"
+  - "B"
+  - "D"
+  - "A"
+  "Gaug":
+  - "G3"
+  - "B3"
+  - "D\u266F3"
+  "Gdim":
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "Gdim7":
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "E3"
+  "Gm":
+  - "G3"
+  - "A\u266F3"
+  - "D4"
+  "Gm/maj7":
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F\u266F3"
+  "Gm11":
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  "Gm13":
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  "Gm7":
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  "Gm7b5":
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  "Gm9":
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  - "A3"
+  "Gm9-5":
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  - "A3"
+  "Gmadd9":
+  - "G"
+  - "A\u266F"
+  - "D"
+  - "A"
+  "Gmaj":
+  - "G3"
+  - "B3"
+  - "D4"
+  "Gmaj13":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C3"
+  - "E3"
+  "Gmaj13\u266F11":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  - "E3"
+  "Gmaj7":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  "Gmaj7+5":
+  - "G3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "Gmaj7-5":
+  - "G3"
+  - "B3"
+  - "C\u266F3"
+  - "F\u266F3"
+  "Gmaj9":
+  - "G3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "Gmin6":
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "E3"
+  "Gsus2":
+  - "G"
+  - "A"
+  - "D"
+  "Gsus4":
+  - "G3"
+  - "C3"
+  - "D3"
+  "G\u266F(\u266D5)":
+  - "G\u266F"
+  - "C"
+  - "D"
+  "G\u266F(\u266F5)":
+  - "G\u266F"
+  - "C"
+  - "E"
+  "G\u266F11":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "G\u266F11-9":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  - "C\u266F3"
+  "G\u266F13":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  "G\u266F13+11":
+  - "G\u266F"
+  - "C"
+  - "D\u266F"
+  - "F\u266F"
+  - "A\u266F"
+  - "D"
+  - "F"
+  "G\u266F13\u266D5\u266D9":
+  - "G\u266F"
+  - "C"
+  - "D"
+  - "F\u266F"
+  - "A"
+  - "C\u266F"
+  - "F"
+  "G\u266F13\u266D9":
+  - "G\u266F"
+  - "C"
+  - "D\u266F"
+  - "F"
+  - "F\u266F"
+  - "A"
+  - "C\u266F"
+  "G\u266F13\u266D9\u266F11":
+  - "G\u266F"
+  - "C"
+  - "D\u266F"
+  - "F\u266F"
+  - "A"
+  - "D"
+  - "F"
+  "G\u266F5":
+  - "G\u266F"
+  - "D\u266F"
+  "G\u266F6":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F3"
+  "G\u266F6/9":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F3"
+  - "A\u266F3"
+  "G\u266F7":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "G\u266F7+5":
+  - "G\u266F3"
+  - "C3"
+  - "E3"
+  - "F\u266F3"
+  "G\u266F7+9":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "B3"
+  "G\u266F7+9-5":
+  - "G\u266F3"
+  - "C3"
+  - "D3"
+  - "F\u266F3"
+  - "B3"
+  "G\u266F7-5":
+  - "G\u266F3"
+  - "C3"
+  - "D3"
+  - "F\u266F3"
+  "G\u266F7-9":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A3"
+  "G\u266F7sus4":
+  - "G\u266F3"
+  - "C\u266F3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "G\u266F7\u266F11":
+  - "G\u266F"
+  - "C"
+  - "D\u266F"
+  - "F\u266F"
+  - "A\u266F"
+  - "D"
+  - "F"
+  "G\u266F7\u266F5\u266F9":
+  - "G\u266F"
+  - "C"
+  - "E"
+  - "F\u266F"
+  - "B"
+  "G\u266F9":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "B3"
+  "G\u266F9+5":
+  - "G\u266F3"
+  - "C3"
+  - "E3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "G\u266F9-5":
+  - "G\u266F3"
+  - "C3"
+  - "D3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "G\u266Fadd9":
+  - "G\u266F"
+  - "C"
+  - "D\u266F"
+  - "A\u266F"
+  "G\u266Faug":
+  - "G\u266F3"
+  - "C3"
+  - "E3"
+  "G\u266Fdim":
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  "G\u266Fdim7":
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F3"
+  "G\u266Fm":
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F4"
+  "G\u266Fm/maj7":
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "G3"
+  "G\u266Fm11":
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  "G\u266Fm13":
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  "G\u266Fm7":
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  "G\u266Fm7b5":
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  "G\u266Fm9":
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "G\u266Fm9-5":
+  - "G\u266F3"
+  - "B3"
+  - "D3"
+  - "F\u266F3"
+  - "A\u266F3"
+  "G\u266Fmadd9":
+  - "G\u266F"
+  - "B"
+  - "D\u266F"
+  - "A\u266F"
+  "G\u266Fmaj":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F4"
+  "G\u266Fmaj13":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "C\u266F3"
+  - "F3"
+  "G\u266Fmaj13\u266F11":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "A\u266F3"
+  - "D3"
+  - "F3"
+  "G\u266Fmaj7":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  "G\u266Fmaj7+5":
+  - "G\u266F3"
+  - "C3"
+  - "E3"
+  - "G3"
+  "G\u266Fmaj7-5":
+  - "G\u266F3"
+  - "C3"
+  - "D3"
+  - "G3"
+  "G\u266Fmaj9":
+  - "G\u266F3"
+  - "C3"
+  - "D\u266F3"
+  - "G3"
+  - "B3"
+  "G\u266Fmin6":
+  - "G\u266F3"
+  - "B3"
+  - "D\u266F3"
+  - "F3"
+  "G\u266Fsus2":
+  - "G\u266F"
+  - "A\u266F"
+  - "D\u266F"
+  "G\u266Fsus4":
+  - "G\u266F3"
+  - "C\u266F3"
+  - "D\u266F3"
