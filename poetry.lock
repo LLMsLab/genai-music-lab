@@ -2376,6 +2376,22 @@ editorconfig = ">=0.12.2"
 six = ">=1.13.0"
 
 [[package]]
+name = "jsonpickle"
+version = "3.0.2"
+description = "Python library for serializing any arbitrary object graph into JSON"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "jsonpickle-3.0.2-py3-none-any.whl", hash = "sha256:4a8442d97ca3f77978afa58068768dba7bff2dbabe79a9647bc3cdafd4ef019f"},
+    {file = "jsonpickle-3.0.2.tar.gz", hash = "sha256:e37abba4bfb3ca4a4647d28bb9f4706436f7b46c8a8333b4a718abafa8e46b37"},
+]
+
+[package.extras]
+docs = ["jaraco.packaging (>=3.2)", "rst.linker (>=1.9)", "sphinx"]
+testing = ["ecdsa", "feedparser", "gmpy2", "numpy", "pandas", "pymongo", "pytest (>=3.5,!=3.7.3)", "pytest-black-multipy", "pytest-checkdocs (>=1.2.3)", "pytest-cov", "pytest-flake8 (>=1.1.1)", "scikit-learn", "sqlalchemy"]
+testing-libs = ["simplejson", "ujson"]
+
+[[package]]
 name = "jsonschema"
 version = "4.19.1"
 description = "An implementation of JSON Schema validation for Python"
@@ -3009,6 +3025,43 @@ files = [
 ]
 
 [[package]]
+name = "midiutil"
+version = "1.2.1"
+description = "A pure python library for creating multi-track MIDI files"
+optional = false
+python-versions = "*"
+files = [
+    {file = "MIDIUtil-1.2.1.tar.gz", hash = "sha256:79fa983bd1efc60785f68a8fe78fa8f45b8d7ec5898bf7cb7f3f7f3336d6a90a"},
+]
+
+[[package]]
+name = "mido"
+version = "1.3.0"
+description = "MIDI Objects for Python"
+optional = false
+python-versions = "~=3.7"
+files = [
+    {file = "mido-1.3.0-py3-none-any.whl", hash = "sha256:a710a274c8a1a3fd481f526d174a16e117b5e58d719ad92937a67fb6167a9432"},
+    {file = "mido-1.3.0.tar.gz", hash = "sha256:84282e3ace34bca3f984220db2dbcb98245cfeafb854260c02e000750dca86aa"},
+]
+
+[package.dependencies]
+packaging = ">=23.1,<24.0"
+
+[package.extras]
+build-docs = ["sphinx (>=4.3.2,<4.4.0)", "sphinx-rtd-theme (>=1.2.2,<1.3.0)"]
+check-manifest = ["check-manifest (>=0.49)"]
+dev = ["mido[build-docs]", "mido[check-manifest]", "mido[lint-code]", "mido[lint-reuse]", "mido[release]", "mido[test]"]
+lint-code = ["flake8 (>=5.0.4,<5.1.0)"]
+lint-reuse = ["reuse (>=1.1.2,<1.2.0)"]
+ports-all = ["mido[ports-pygame]", "mido[ports-rtmidi-python]", "mido[ports-rtmidi]"]
+ports-pygame = ["PyGame (>=2.5,<3.0)"]
+ports-rtmidi = ["python-rtmidi (>=1.5.4,<1.6.0)"]
+ports-rtmidi-python = ["rtmidi-python (>=0.2.2,<0.3.0)"]
+release = ["twine (>=4.0.2,<4.1.0)"]
+test-code = ["pytest (>=7.4.0,<7.5.0)"]
+
+[[package]]
 name = "mistune"
 version = "3.0.1"
 description = "A sane and fast Markdown parser with useful plugins and renderers"
@@ -3184,6 +3237,17 @@ python-versions = "*"
 files = [
     {file = "monotonic-1.6-py2.py3-none-any.whl", hash = "sha256:68687e19a14f11f26d140dd5c86f3dba4bf5df58003000ed467e0e2a69bca96c"},
     {file = "monotonic-1.6.tar.gz", hash = "sha256:3a55207bcfed53ddd5c5bae174524062935efed17792e9de2ad0205ce9ad63f7"},
+]
+
+[[package]]
+name = "more-itertools"
+version = "10.1.0"
+description = "More routines for operating on iterables, beyond itertools"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "more-itertools-10.1.0.tar.gz", hash = "sha256:626c369fa0eb37bac0291bce8259b332fd59ac792fa5497b59837309cd5b114a"},
+    {file = "more_itertools-10.1.0-py3-none-any.whl", hash = "sha256:64e0735fcfdc6f3464ea133afe8ea4483b1c5fe3a3d69852e6503b43a0b222e6"},
 ]
 
 [[package]]
@@ -3413,6 +3477,27 @@ files = [
     {file = "murmurhash-1.0.10-cp39-cp39-win_amd64.whl", hash = "sha256:a4209962b9f85de397c3203ea4b3a554da01ae9fd220fdab38757d4e9eba8d1a"},
     {file = "murmurhash-1.0.10.tar.gz", hash = "sha256:5282aab1317804c6ebd6dd7f69f15ba9075aee671c44a34be2bde0f1b11ef88a"},
 ]
+
+[[package]]
+name = "music21"
+version = "8.3.0"
+description = "A Toolkit for Computer-Aided Musical Analysis and Computational Musicology."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "music21-8.3.0-py3-none-any.whl", hash = "sha256:02e602e99fdac7528d42c41aac635a4de070cd41478dea30c7c2c08d79960be4"},
+    {file = "music21-8.3.0.tar.gz", hash = "sha256:28627bf5e47707ac5e6ae5161c3a2160f154b796cf4aca992e5d46847caa7ca6"},
+]
+
+[package.dependencies]
+chardet = "*"
+joblib = "*"
+jsonpickle = "*"
+matplotlib = "*"
+more-itertools = "*"
+numpy = "*"
+requests = "*"
+webcolors = ">=1.5"
 
 [[package]]
 name = "mypy-extensions"
@@ -4425,6 +4510,21 @@ cymem = ">=2.0.2,<2.1.0"
 murmurhash = ">=0.28.0,<1.1.0"
 
 [[package]]
+name = "pretty-midi"
+version = "0.2.10"
+description = "Functions and classes for handling MIDI data conveniently."
+optional = false
+python-versions = "*"
+files = [
+    {file = "pretty_midi-0.2.10.tar.gz", hash = "sha256:ea6e192f94044674e833336ea1f415318ddf28e320302ac7b109edff0d4534bd"},
+]
+
+[package.dependencies]
+mido = ">=1.1.16"
+numpy = ">=1.7.0"
+six = "*"
+
+[[package]]
 name = "prompt-toolkit"
 version = "3.0.39"
 description = "Library for building powerful interactive command lines in Python"
@@ -5009,6 +5109,36 @@ files = [
 
 [package.extras]
 dev = ["atomicwrites (==1.2.1)", "attrs (==19.2.0)", "coverage (==6.5.0)", "hatch", "invoke (==1.7.3)", "more-itertools (==4.3.0)", "pbr (==4.3.0)", "pluggy (==1.0.0)", "py (==1.11.0)", "pytest (==7.2.0)", "pytest-cov (==4.0.0)", "pytest-timeout (==2.1.0)", "pyyaml (==5.1)"]
+
+[[package]]
+name = "python-rtmidi"
+version = "1.5.6"
+description = "A Python binding for the RtMidi C++ library implemented using Cython."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "python_rtmidi-1.5.6-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:39042b963b63f5fd7dc02943f412d29aaef6770b0dec6d2de975e32ed200561e"},
+    {file = "python_rtmidi-1.5.6-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:81ea5f11e5ada292da6c90fd451c4c3105bee1334c7c6aa5fddb57162bbf605b"},
+    {file = "python_rtmidi-1.5.6-cp310-cp310-manylinux_2_28_aarch64.whl", hash = "sha256:f1201cab39a05ecdaf039553bdefce90d2b0927d4d4378bcebcb141f3934fd2a"},
+    {file = "python_rtmidi-1.5.6-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:68883106c4eadde1f9861895ccd8d90868e2380cfa70486ae5e52719eaf5c26e"},
+    {file = "python_rtmidi-1.5.6-cp310-cp310-win_amd64.whl", hash = "sha256:f3cada5737e9db1d0f9de0ddb8e288928b35e506d713cfc2b72614553e830bef"},
+    {file = "python_rtmidi-1.5.6-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:12b2e0b3f7f3946a62d28866150a3f779ed462a39b447896e6b8096f6da520fd"},
+    {file = "python_rtmidi-1.5.6-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:bb41bf25014447f6235139d96866c89041588dc67249199c97a2037779543022"},
+    {file = "python_rtmidi-1.5.6-cp311-cp311-manylinux_2_28_aarch64.whl", hash = "sha256:af04dc56c98a0cf362f4b8da54b7477a68a4efdd7d8c8e2bf4997737d332a91a"},
+    {file = "python_rtmidi-1.5.6-cp311-cp311-manylinux_2_28_x86_64.whl", hash = "sha256:b35455350513e4a82a930df3583eea6ac10dab9dc69a47a2ff5be4d9d06cd952"},
+    {file = "python_rtmidi-1.5.6-cp311-cp311-win_amd64.whl", hash = "sha256:ca000906a0a06e9281667aae20de7d697b50edfc4a899e7e0d945a058d087a65"},
+    {file = "python_rtmidi-1.5.6-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:ce5d38597f687b6f70ddb7fb10c8b42481e802c1d48befe1fb9ad70850d9c126"},
+    {file = "python_rtmidi-1.5.6-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:4c89e8f867307e6d92962e57254fbd7d296a59adbcf3b23d7f22429c7eed073f"},
+    {file = "python_rtmidi-1.5.6-cp38-cp38-manylinux_2_28_aarch64.whl", hash = "sha256:f522243a06cbd8fae20d7631eded32c67b0e727278a8a487b309062a0608e024"},
+    {file = "python_rtmidi-1.5.6-cp38-cp38-manylinux_2_28_x86_64.whl", hash = "sha256:5e85537cdd8721724b024206d812c3289cbceef4b99dda5c030bbb29f30a3c0b"},
+    {file = "python_rtmidi-1.5.6-cp38-cp38-win_amd64.whl", hash = "sha256:7d436d9f2bba11d1f82d951a2213d5f66cc5975e4e8c8ac5899fd402b1a73b34"},
+    {file = "python_rtmidi-1.5.6-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:67936128df85ded6c71e6a2dd8dc4134eca424c96a24e6954c84d4fddc0526cf"},
+    {file = "python_rtmidi-1.5.6-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:c8a4ae8a75b3425136772acbd8153847211f98c1cd2eb73eb606df9eaab99a8c"},
+    {file = "python_rtmidi-1.5.6-cp39-cp39-manylinux_2_28_aarch64.whl", hash = "sha256:d5fe85c21a596810a0bef28aeee394cf6ee9139265af7837ab1781d899f7a488"},
+    {file = "python_rtmidi-1.5.6-cp39-cp39-manylinux_2_28_x86_64.whl", hash = "sha256:25e93bae54b164642788df8d064dd45051b2a81bcb49866388de01802f97ce9b"},
+    {file = "python_rtmidi-1.5.6-cp39-cp39-win_amd64.whl", hash = "sha256:9390e434244eec925a5d2fc308e03ecea39117cae76ef513c74d40f78d448cc0"},
+    {file = "python_rtmidi-1.5.6.tar.gz", hash = "sha256:b2a0a399bb4a5e1a56477798afd41d022a18b5e954f6d0ff92b45bb99bee3710"},
+]
 
 [[package]]
 name = "pytoolconfig"
@@ -7348,6 +7478,21 @@ files = [
 ]
 
 [[package]]
+name = "webcolors"
+version = "1.13"
+description = "A library for working with the color formats defined by HTML and CSS."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "webcolors-1.13-py3-none-any.whl", hash = "sha256:29bc7e8752c0a1bd4a1f03c14d6e6a72e93d82193738fa860cbff59d0fcc11bf"},
+    {file = "webcolors-1.13.tar.gz", hash = "sha256:c225b674c83fa923be93d235330ce0300373d02885cef23238813b0d5668304a"},
+]
+
+[package.extras]
+docs = ["furo", "sphinx", "sphinx-copybutton", "sphinx-inline-tabs", "sphinx-notfound-page", "sphinxext-opengraph"]
+tests = ["pytest", "pytest-cov"]
+
+[[package]]
 name = "webencodings"
 version = "0.5.1"
 description = "Character encoding aliases for legacy web content"
@@ -7636,4 +7781,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "ec9cc834628b185168c81490e1d1cba398072957b097b710a0287d77ca35acda"
+content-hash = "b17c0a3ef8596a7fc96e25c8fb94dc0e49c47bbed9b5ba86ce5ddfdf0686cb47"
